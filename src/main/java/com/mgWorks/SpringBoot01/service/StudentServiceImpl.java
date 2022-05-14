@@ -2,11 +2,13 @@ package com.mgWorks.SpringBoot01.service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mgWorks.SpringBoot01.entity.Student;
+import com.mgWorks.SpringBoot01.error.StudentNotFoundException;
 import com.mgWorks.SpringBoot01.repository.StudentRepository;
 
 @Service
@@ -29,8 +31,12 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Student getStudentByID(int sid) {
+	public Student getStudentByID(int sid) throws StudentNotFoundException {
 
+		Optional<Student> student = studentRepository.findById(sid);
+		if (!student.isPresent()) {
+			throw new StudentNotFoundException("Student details not found");
+		}
 		return studentRepository.findById(sid).get();
 
 	}
