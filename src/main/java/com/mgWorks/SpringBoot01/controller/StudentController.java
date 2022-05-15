@@ -45,7 +45,7 @@ public class StudentController {
 		
 	}
 	@DeleteMapping("/student/{id}")
-	public String deleteStudentByID(@PathVariable("id") int sid) {
+	public String deleteStudentByID(@PathVariable("id") int sid) throws StudentNotFoundException  {
 		LOGGER.info("deleteStudentByID method invoked");
 		studentService.deleteStudentByID(sid);
 		return "Student details deleted successfully";

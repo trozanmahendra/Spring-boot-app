@@ -42,9 +42,12 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void deleteStudentByID(int sid) {
-
-		studentRepository.deleteById(sid);
+	public void deleteStudentByID(int sid) throws StudentNotFoundException {
+		Optional<Student> student = studentRepository.findById(sid);
+		if (!student.isPresent())
+			throw new StudentNotFoundException("Student details not found");
+		else
+			studentRepository.deleteById(sid);
 	}
 
 	@Override

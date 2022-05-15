@@ -12,7 +12,7 @@ public interface StudentService {
 	public Student saveStudent(Student student);
 	public List<Student> fetchStudent();
 	public Student getStudentByID(int sid) throws StudentNotFoundException;
-	public void deleteStudentByID(int sid);
+	public void deleteStudentByID(int sid) throws StudentNotFoundException ;
 	public Student updateStudentByID(int sid, Student student);
 	public Student getByName(String sname);
 
